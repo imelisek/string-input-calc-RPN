@@ -18,7 +18,7 @@ def calculate(expr):
   
     for token in expr.split():
         if is_action(token):
-            while len(stack_operators) != 0 and OPERATION_PRIORITY[stack_operators[-1]] > OPERATION_PRIORITY[token]:
+            while len(stack_operators) != 0 and OPERATION_PRIORITY[stack_operators[-1]] >= OPERATION_PRIORITY[token]:
                 operand_right = stack_nums.pop()
                 operand_left = stack_nums.pop()
                 func = OPERATORS[stack_operators.pop()]                
@@ -43,7 +43,7 @@ def calculate(expr):
     return stack_nums[-1]
 
 
-print(calculate('2 + 2 * 2 ** 2'))
+print(calculate('2 - 1 * 8 + 4'))
 
 
 
