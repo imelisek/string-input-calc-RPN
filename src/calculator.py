@@ -7,15 +7,18 @@ OPERATION_PRIORITY = {'+': 1, '-': 1, '*': 2, '/': 2, '**': 3}
 def is_action(val):
     if val in OPERATORS.keys():
         return True
+    return False
     
 def is_number(val):
     if val.isdigit():
         return True
+    return False
+    
 
 def calculate(expr):
     stack_nums = []
     stack_operators = []
-  
+
     for token in expr.split():
         if is_action(token):
             while len(stack_operators) != 0 and OPERATION_PRIORITY[stack_operators[-1]] >= OPERATION_PRIORITY[token]:
@@ -43,11 +46,6 @@ def calculate(expr):
     return stack_nums[-1]
 
 
-print(calculate('2 - 1 * 8 + 4'))
-
-
-
-    
-
-
+if __name__ == "__main__":
+    print(calculate('1 / 2 + 2'))
     
