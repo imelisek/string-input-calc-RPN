@@ -1,20 +1,30 @@
 from src.calculator import calculate, is_number, is_action
+import pytest
+from pytest import approx
 
 def test_easy():
     assert 4 == calculate('2 + 2')
+
+def test_wrong_value():
+    with pytest.raises(ValueError):
+        calculate('letter')
+
+def test_zero_division():
+    with pytest.raises(ZeroDivisionError):
+        calculate('8 / 0')
 
 def test_priorities():
     assert 10 == calculate('2 + 2 * 2 ** 2')
 
 def test_priorities2():
-    assert 27 == calculate('6 / 2 * 3 ** 2')
+    assert approx(0.00495) == calculate('495 / 1000 / 100')
 
 def test_isnum_true():
-    assert True == is_number('3')
+    assert True == is_number('8')
 
 def test_isnum_notanum():
-    assert ValueError
-
+    assert False == is_number('letter')
+   
 def test_isnum_false():
     assert False == is_number('*')
 
@@ -25,6 +35,7 @@ def test_isact_false():
     assert False == is_action('5')
 
 def test_isact_notanaction():
-    assert ValueError
+   assert False == is_action('letter')
+
 
 
