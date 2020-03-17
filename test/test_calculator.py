@@ -37,5 +37,8 @@ def test_isact_false():
 def test_isact_notanaction():
    assert False == is_action('letter')
 
+def test_tobefailed():
+    assert 22 == calculate('2 + 2')
+
 
 
