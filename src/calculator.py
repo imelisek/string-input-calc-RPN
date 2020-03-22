@@ -1,4 +1,6 @@
 import operator
+import re
+import sys
 
 OPERATORS = {'+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.truediv, '**': operator.pow}
 OPERATION_PRIORITY = {'+': 1, '-': 1, '*': 2, '/': 2, '**': 3}
@@ -10,7 +12,7 @@ def is_action(val):
     return False
     
 def is_number(val):
-    if val.isdigit():
+    if re.search(r'-?\d+(?:\.\d+)?', val):
         return True
     return False
     
@@ -31,11 +33,11 @@ def calculate(expr):
 
 
         elif is_number(token):
-            stack_nums.append(int(token)) #process as a number
+            stack_nums.append(float(token)) #process as a number
 
         else: 
             raise ValueError
-    
+
     while len(stack_operators) != 0:
         operand_right = stack_nums.pop()
         operand_left = stack_nums.pop()
@@ -47,5 +49,9 @@ def calculate(expr):
 
 
 if __name__ == "__main__":
-    print(calculate('1 / 2 + 2'))
+    if len(sys.argv) >= 2:
+        expr = (sys.argv[1])
+    print(calculate(expr))
+    
+    
     
