@@ -49,9 +49,11 @@ def calculate(expr):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 2:
+    if len(sys.argv) == 1:
+        print('Please enter arguments')
+    elif len(sys.argv) >= 2:
         expr = (sys.argv[1])
-    print(calculate(expr))
+        print(calculate(expr))
     
     
     
