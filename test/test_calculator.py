@@ -22,6 +22,9 @@ def test_priorities():
 def test_aprox2():
     assert approx(0.00495) == calculate('495 / 1000 / 100')
 
+def test_parenthesized_expr():
+    assert 12 == calculate('( 2 + 8 / 2 ) * 2')
+
 def test_isnum_true():
     assert True == is_number('8')
 

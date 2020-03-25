@@ -35,20 +35,19 @@ def calculate(expr):
             stack_nums.append(float(token)) #process as a number
 
         
-        elif token == '(':
+        elif token == '(':                  #calculate parenthesized expressions
           stack_operators.append(token)            
     
         elif token == ')':
             while stack_operators[-1] != '(':
-                stack_nums.append(stack_operators.pop())
-                operand_right = stack_nums.pop(-2)
-                operand_left = stack_nums.pop(-2)
-                func = OPERATORS[stack_nums.pop()]                
-                result_num = func(operand_left, operand_right)                
+                operator_parenthesized = stack_operators.pop()
+                operand_right = stack_nums.pop()
+                operand_left = stack_nums.pop()
+                func_parenthesized = OPERATORS[operator_parenthesized]                
+                result_num = func_parenthesized(operand_left, operand_right)                
                 stack_nums.append(result_num)
             stack_operators.pop()
-
-
+                      
         else: 
             raise ValueError
 
@@ -73,17 +72,4 @@ if __name__ == "__main__":
     
 
 
-        
- #       elif token == '(':
-   #       stack_operators.append(token)            
     
-    #    elif token == ')':
-     #       while stack_operators[-1] != '(':
-      #          stack_nums.append(stack_operators.pop())
-       #         operand_right = stack_nums.pop()
-        #        operand_left = stack_nums.pop()
-         #       func = OPERATORS[stack_nums.pop()]                
-          #      result_num = func(operand_left, operand_right)                
-           #     stack_nums.append(result_num)
-#
- #           stack_operators.pop()
