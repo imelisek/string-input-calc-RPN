@@ -1,4 +1,4 @@
-from src.calculator import calculate, is_number, is_action
+from src.calculator import calculate, is_number, is_action, is_unary
 import pytest
 from pytest import approx
 
@@ -24,6 +24,18 @@ def test_aprox2():
 
 def test_parenthesized_expr():
     assert 12 == calculate('( 2 + 8 / 2 ) * 2')
+
+def test_unary_expr_easy():
+    assert approx(0.5) == calculate('sin 30')
+
+def test_unary_expr_complex():
+    assert 4.5 == calculate('2 + sin ( 15 + 5 * 3 ) + 2')
+
+def test_factorial():
+    assert approx(64) == calculate('2 + 5 ! * sin ( 15 + 5 * 3 ) + 2')  
+
+def test_hyperfunc():
+    assert approx(0.2766) == calculate('-2.5 + sh 100')  
 
 def test_isnum_true():
     assert True == is_number('8')
@@ -51,6 +63,17 @@ def test_isact_false():
 
 def test_isact_notanaction():
    assert False == is_action('letter')
+
+def test_isunary_true():
+    assert True == is_unary('cos')
+
+def test_isunary_false():
+    assert False == is_unary('5')
+
+def test_isunary_notanaction():
+   assert False == is_unary('letter')
+
+
 
 
 
